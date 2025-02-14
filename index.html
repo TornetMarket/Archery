@@ -5,7 +5,9 @@
        <meta name="viewport" content="width=device-width, initial-scale=1">
        <meta charset="utf-8">
        <link rel="stylesheet" href="style.css">
-       <script type="text/javascript" src="script.js"></script>
+       <script type="text/javascript" src="script.js" defer></script>
+
+       <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2827/2827022.png">
     </head>
     <body>
         <div id="mainContainer">
@@ -22,9 +24,22 @@
                 <span style="font-size:60px">G</span>AME
             </h1>
             <p id="credits" style="font-size: 14px; color: #000000; margin-top: -10px;">Developed By: UnknownBlackHat</p>
-            <button>TAP TO START</button>
+            <button id="startButton">TAP TO START</button>
             <h2><span id="best">0</span><br>Best</h2>
         </div>
     </div>
+
+    <script>
+        // List of MP3 files
+        const soundtracks = ["vertex.mp3", "disco.mp3", "sushi.mp3"];
+        let audio = new Audio(); // Create an audio object
+
+        document.getElementById("startButton").addEventListener("click", function() {
+            // Pick a random song
+            let randomTrack = soundtracks[Math.floor(Math.random() * soundtracks.length)];
+            audio.src = randomTrack;  // Set the audio source
+            audio.play();  // Play the music
+        });
+    </script>
     </body>
 </html>
