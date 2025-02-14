@@ -7,6 +7,7 @@
        <link rel="stylesheet" href="style.css">
        <script type="text/javascript" src="script.js" defer></script>
 
+       <!-- Website Icon (Archery Board) -->
        <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2827/2827022.png">
     </head>
     <body>
@@ -30,15 +31,25 @@
     </div>
 
     <script>
-        // List of MP3 files
         const soundtracks = ["vertex.mp3", "disco.mp3", "sushi.mp3"];
-        let audio = new Audio(); // Create an audio object
+        let audio = new Audio();
+        let lastPlayed = null;
+
+        function playRandomSong() {
+            // Filter out the last played song to avoid repetition
+            let availableSongs = soundtracks.filter(song => song !== lastPlayed);
+            let randomTrack = availableSongs[Math.floor(Math.random() * availableSongs.length)];
+            
+            audio.src = randomTrack;
+            audio.play();
+            lastPlayed = randomTrack;
+
+            // When the song ends, play another one
+            audio.onended = playRandomSong;
+        }
 
         document.getElementById("startButton").addEventListener("click", function() {
-            // Pick a random song
-            let randomTrack = soundtracks[Math.floor(Math.random() * soundtracks.length)];
-            audio.src = randomTrack;  // Set the audio source
-            audio.play();  // Play the music
+            playRandomSong();
         });
     </script>
     </body>
